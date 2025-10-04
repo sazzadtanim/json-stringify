@@ -1,6 +1,6 @@
 ---
-import Button from "@/components/starwind/button";
-import { Textarea } from "@/components/starwind/textarea";
+import Header from "@/components/thisApp/header.astro";
+import "@/styles/starwind.css"
 ---
 
 <!doctype html>
@@ -14,8 +14,13 @@ import { Textarea } from "@/components/starwind/textarea";
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body
-        class="bg-gray-50 min-h-screen flex items-center justify-center p-4 font-sans"
+        class="min-h-screen mx-auto bg-background"
     >
-        <slot />
+        <Header />
+        <main class="mx-auto container">
+            <slot />
+        </main>
     </body>
 </html>
+
+
