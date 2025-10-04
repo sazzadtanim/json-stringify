@@ -1,0 +1,19 @@
+{
+  "$schema": "https://starwind.dev/config-schema.json",
+  "tailwind": {
+    "css": "src/styles/starwind.css",
+    "baseColor": "gray",
+    "cssVariables": true
+  },
+  "componentDir": "src/components",
+  "components": [
+    {
+      "name": "button",
+      "version": "2.1.0"
+    },
+    {
+      "name": "textarea",
+      "version": "1.2.0"
+    }
+  ]
+}
