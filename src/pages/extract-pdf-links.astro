@@ -1,0 +1,151 @@
+---
+import Layout from "./Layout.astro";
+import PDFLinkExtractor from "@/components/react/pdf-extractor"
+---
+
+<Layout>
+  <PDFLinkExtractor client:load/>
+</Layout>
+<style>
+    .container {
+        max-width: 1200px;
+        width: 100%;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .header p {
+        opacity: 0.9;
+        font-size: 0.95rem;
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .panel {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .panel-header h2 {
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 400px;
+        padding: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        resize: vertical;
+        transition: border-color 0.3s;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .output-area {
+        background: #1e293b;
+        color: #e2e8f0;
+        border: none;
+    }
+
+    button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    .btn-secondary:hover {
+        background: #e2e8f0;
+    }
+
+    .actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding: 0 2rem 2rem;
+    }
+
+    .error {
+        background: #fee;
+        border: 1px solid #fcc;
+        color: #c33;
+        padding: 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+    }
+
+    .success {
+        background: #efe;
+        border: 1px solid #cfc;
+        color: #3c3;
+        padding: 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .content {
+            grid-template-columns: 1fr;
+        }
+
+        body {
+            padding: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
