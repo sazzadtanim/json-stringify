@@ -21,18 +21,14 @@ export default function PDFLinkExtractor() {
       const doc = parser.parseFromString(input, "text/html");
 
       // Find all links (a tags and other elements with href/src)
-      const links = [];
+      const links: string[] = [];
 
       // Get all anchor tags
       const anchors = doc.querySelectorAll("a[href]");
       anchors.forEach((a) => {
         const href = a.getAttribute("href");
         if (href && href.toLowerCase().endsWith(".pdf")) {
-          links.push({
-            url: href,
-            text: a.textContent.trim() || "No text",
-            type: "link",
-          });
+          links.push(href);
         }
       });
 
@@ -41,11 +37,7 @@ export default function PDFLinkExtractor() {
       iframes.forEach((iframe) => {
         const src = iframe.getAttribute("src");
         if (src && src.toLowerCase().includes(".pdf")) {
-          links.push({
-            url: src,
-            text: iframe.getAttribute("title") || "Embedded PDF",
-            type: "iframe",
-          });
+          links.push(src);
         }
       });
 
@@ -54,11 +46,7 @@ export default function PDFLinkExtractor() {
       embeds.forEach((embed) => {
         const src = embed.getAttribute("src");
         if (src && src.toLowerCase().endsWith(".pdf")) {
-          links.push({
-            url: src,
-            text: "Embedded PDF",
-            type: "embed",
-          });
+          links.push(src);
         }
       });
 
@@ -67,11 +55,7 @@ export default function PDFLinkExtractor() {
       objects.forEach((obj) => {
         const data = obj.getAttribute("data");
         if (data && data.toLowerCase().endsWith(".pdf")) {
-          links.push({
-            url: data,
-            text: "PDF Object",
-            type: "object",
-          });
+          links.push(data);
         }
       });
 
@@ -81,11 +65,7 @@ export default function PDFLinkExtractor() {
         return;
       }
 
-      const json = JSON.stringify(
-        { pdfLinks: links, count: links.length },
-        null,
-        2
-      );
+      const json = JSON.stringify(links, null, 2);
       setOutput(json);
       setSuccess(
         `✓ Found ${links.length} PDF link${links.length !== 1 ? "s" : ""}!`
