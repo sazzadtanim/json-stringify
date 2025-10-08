@@ -95,6 +95,34 @@ export default function PDFLinkExtractor() {
     });
   };
 
+  const saveAsCSV = () => {
+    try {
+      const links = JSON.parse(output);
+
+      // Create CSV content with header
+      let csvContent = "PDF Link\n";
+      links.forEach((link: string) => {
+        // Escape quotes in the link and wrap in quotes
+        const escapedLink = `"${link.replace(/"/g, '""')}"`;
+        csvContent += escapedLink + "\n";
+      });
+
+      // Create blob and download
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `pdf-links-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      setSuccess("✓ CSV file downloaded!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (e) {
+      setError("Error creating CSV file");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-8 flex items-center justify-center">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden">
@@ -182,6 +210,12 @@ Example:
             className="px-8 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
           >
             Clear All
+          </button>
+          <button
+            onClick={saveAsCSV}
+            className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+          >
+            Download as CSV
           </button>
         </div>
 
