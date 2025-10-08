@@ -1,14 +1,20 @@
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
-import { defineConfig } from 'astro/config';
-
+import { defineConfig } from "astro/config";
+import clarity from "@kbyte-tech/astro-clarity";
 import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
-      plugins: [tailwindcss()],
-	},
+    plugins: [tailwindcss()],
+  },
 
-  integrations: [react()],
+  integrations: [
+    react(),
+    clarity({
+      enabled: true,
+      projectId: "tn1ii8rdxr",
+    }),
+  ],
 });
